@@ -1,0 +1,24 @@
+// @TODO: Use flex stuff for this!
+.paragraphs-items-field-audio-books {
+  // Clearfix.
+  &:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+
+  margin: 2em 0;
+
+  .field-item {
+    width: 50%;
+    float: left;
+    padding-left: 0;
+    padding-right: 1em;
+    margin: 1em 0;
+
+    &:nth-child(2n) {
+      padding-left: 1em;
+      padding-right: 0;
+    }
+  }
+}
