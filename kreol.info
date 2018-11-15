@@ -1,0 +1,4 @@
+name = Kreol
+description = The Kreol theme
+core = 7.x
+base theme = orwell
