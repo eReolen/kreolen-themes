@@ -4,6 +4,6 @@
             <h2 class="heading"><?php print render($content['field_heading']); ?></h2>
         <?php endif ?>
 
-        <?php print render($content['field_materials']); ?>
+        <?php print render($content['field_audio_books']); ?>
     </div>
 </div>

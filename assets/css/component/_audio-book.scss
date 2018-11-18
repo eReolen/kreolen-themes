@@ -1,24 +1,23 @@
 // @TODO: Use flex stuff for this!
-.paragraphs-items-field-audio-books {
-  // Clearfix.
-  &:after {
-    content: "";
-    display: table;
-    clear: both;
-  }
+$audio-books-spacing: 1em;
 
-  margin: 2em 0;
+.paragraphs-item-campaign-audio-books {
+  @include heading;
 
-  .field-item {
-    width: 50%;
-    float: left;
-    padding-left: 0;
-    padding-right: 1em;
-    margin: 1em 0;
+  .paragraphs-items-field-audio-books {
+    @include clearfix;
 
-    &:nth-child(2n) {
-      padding-left: 1em;
-      padding-right: 0;
+    .field-item {
+      width: 50%;
+      float: left;
+      padding-left: 0;
+      padding-right: $audio-books-spacing;
+      margin: $audio-books-spacing 0;
+
+      &:nth-child(2n) {
+        padding-left: $audio-books-spacing;
+        padding-right: 0;
+      }
     }
   }
 }

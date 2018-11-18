@@ -1,0 +1,50 @@
+// Base settings.
+
+// Base components.
+@mixin clearfix {
+  &:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+}
+
+@mixin heading {
+  .heading {
+    font-family: "SourceSansProLight", sans-serif;
+    font-size: 1.5rem;
+    color: #505050;
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+}
+
+body {
+  background: #282828;
+
+  .content-wrapper {
+    background: #eee;
+    padding: 0;
+
+    .pane-page-content {
+      padding: 0;
+
+      .main-content {
+        padding: 0 2rem;
+      }
+
+      .footer {
+        margin-top: 0;
+      }
+
+      .footer__inner {
+        padding: 2rem;
+      }
+    }
+  }
+}
+
+// Composite components.
+@import 'component/audio-book';
+@import 'component/materials';
+@import 'component/text';

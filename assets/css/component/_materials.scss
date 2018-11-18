@@ -1,0 +1,14 @@
+.paragraphs-item-campaign-materials {
+  @include heading;
+
+  .paragraphs-items-field-materials {
+    .field-items {
+      display: flex;
+      justify-content: space-between;
+
+      .field-item {
+        width: 225px;
+      }
+    }
+  }
+}

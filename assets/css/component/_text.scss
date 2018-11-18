@@ -1,0 +1,7 @@
+.paragraphs-item-campaign-text {
+  @include heading;
+
+  p + p {
+    margin-top: 1em;
+  }
+}

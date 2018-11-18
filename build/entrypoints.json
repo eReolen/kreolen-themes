@@ -1,1 +1,1 @@
-{"entrypoints":{"app":{"js":["build/runtime.js","build/app.js"],"css":["build/app.css"]}}}
+{"entrypoints":{"kreol":{"css":["build/kreol.css"],"js":["build/kreol.js"]}}}
