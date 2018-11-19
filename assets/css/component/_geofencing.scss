@@ -1,0 +1,26 @@
+#geofencing {
+  position: fixed;
+  // display: none;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0,0,0,0.5);
+  z-index: 20;
+  // cursor: pointer;
+    display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .geofencing-content {
+    background: orange;
+    padding: 2rem;
+    z-index: 1072;
+
+    header, footer, .step {
+      margin: 1em 0;
+    }
+  }
+}

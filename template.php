@@ -4,14 +4,17 @@
  * Implementation of hook_preprocess_page().
  */
 function kreol_preprocess_page(&$variables) {
-  header('Content-type: text/plain'); echo var_export(null, true); die(__FILE__.':'.__LINE__.':'.__METHOD__);
 }
 
 /**
  * Implementation of hook_preprocess_panels_pane().
  */
 function kreol_preprocess_panels_pane(&$variables) {
-  if (isset($variables['node']->type)) {
-    header('Content-type: text/plain'); echo var_export($variables['theme_hook_suggestions'], true); die(__FILE__.':'.__LINE__.':'.__METHOD__);
+  if (isset($variables['content']['#object'])) {
+    $node = $variables['content']['#object'];
+    // header('Content-type: text/plain'); echo var_export($node, true); die(__FILE__.':'.__LINE__.':'.__METHOD__);
+    // Inject geofencing stuff.
+    // drupal_add_css(drupal_get_path('theme', 'kreol') . '/experiments/public/build/geofencing.css');
+    drupal_add_js(drupal_get_path('theme', 'kreol') . '/build/geofencing.js');
   }
 }
