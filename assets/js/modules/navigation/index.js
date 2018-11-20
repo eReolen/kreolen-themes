@@ -25,13 +25,28 @@ class Navigation {
     }
   }
 
+  addClass(element, name) {
+    const names = element.className.split(/\s+/)
+    if (-1 === names.indexOf(name)) {
+        element.className += ' ' + name;
+    }
+  }
+
+  removeClass(element, className) {
+    const names = element.className.split(/\s+/)
+    const index = names.indexOf(name);
+    if (-1 < index) {
+      element.className = names.splice(index, 1).join(' ');
+    }
+  }
+
   setCurrent(element) {
     if (element) {
       this.current = element
       this.elements.forEach((el) => {
-        el.classList.remove(this.configuration.currentClass || 'current')
+        this.removeClass(el, this.configuration.currentClass || 'current')
       })
-      element.classList.add(this.configuration.currentClass || 'current')
+      this.addClass(element, this.configuration.currentClass || 'current')
     }
   }
 
@@ -104,7 +119,7 @@ class GridNavigation extends Navigation {
 
     if (!this.cursor) {
       this.cursor = document.createElement('div')
-      this.cursor.classList.add(this.configuration.cursorClass || 'cursor')
+      this.addClass(this.cursor, this.configuration.cursorClass || 'cursor')
       this.current.parentNode.appendChild(this.cursor)
     }
 
