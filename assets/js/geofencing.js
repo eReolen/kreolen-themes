@@ -2,7 +2,6 @@
 
 (function ($) {
   const showStep = (index) => {
-    // $('#geofencing-overlay').toggle(true)
     $('#geofencing .step').toggle(false)
     $('#geofencing .step[data-step="'+index+'"]').toggle(true)
   }
@@ -19,16 +18,19 @@
   const checkLocation = (location) => {
     showStep('checking-location')
 
-    const distance = getDistance(
-      location.coords.longitude, location.coords.latitude,
-      origin.coords.longitude, origin.coords.latitude
-    )
+    for (let origin of config.origins) {
+      const distance = getDistance(
+        location.coords.latitude, location.coords.longitude,
+        origin.coords.latitude, origin.coords.longitude
+      )
 
-    if (distance <= maxDistance) {
-      accessGranted()
-    } else {
-      accessDenied()
+      if (distance <= config.max_distance) {
+        accessGranted()
+        return
+      }
     }
+
+    accessDenied()
   }
 
   const accessGranted = () => {
@@ -50,18 +52,14 @@
     showStep('geofencing-declined')
   }
 
-  let origin = null
-  let maxDistance = null
+  let config = {}
 
   $(() => {
-    const coords = $('#geofencing').data('origin').split(',')
-    origin = {
-      coords: {
-        latitude: coords[0],
-        longitude: coords[1],
-      }
+    const el = document.getElementById('campaign-geofencing-config')
+    try {
+        config = JSON.parse(el.innerHTML)
+    } catch (e) {
     }
-    maxDistance = parseFloat($('#geofencing').data('maxDistance'))
 
     showStep('message')
     $('#geofencing-accept').on('click', getLocation)
