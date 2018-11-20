@@ -1,5 +1,6 @@
 {
   "build/geofencing.js": "/build/geofencing.js",
   "build/kreol.css": "/build/kreol.css",
-  "build/kreol.js": "/build/kreol.js"
+  "build/kreol.js": "/build/kreol.js",
+  "build/navigation.js": "/build/navigation.js"
 }

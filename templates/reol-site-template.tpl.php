@@ -6,6 +6,7 @@
  */
 ?>
 <div id="page<?php print $css_id ? " $css_id" : ''; ?>" class="<?php print $classes; ?>">
+<?php if (0 === 1): ?>
     <div id="geofencing-overlay"></div>
     <div id="geofencing" data-origin="56.1917588,10.1711573" data-max-distance="1000">
       <div class="geofencing-content">
@@ -43,6 +44,7 @@
       </footer>
       </div>
     </div>
+<?php endif ?>
 
     <?php if (!empty($content['branding'])): ?>
     <header class="site-header">
