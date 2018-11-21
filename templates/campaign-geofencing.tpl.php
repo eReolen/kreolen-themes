@@ -1,3 +1,9 @@
+<?php
+
+/**
+ * @file
+ */
+?>
 <div id="geofencing">
   <div class="geofencing-content">
     <?php if ($header): ?>

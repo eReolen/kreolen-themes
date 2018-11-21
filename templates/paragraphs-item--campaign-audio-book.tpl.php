@@ -1,9 +1,13 @@
 <?php
+
+/**
+ * @file
+ */
 $wrapper = entity_metadata_wrapper('paragraphs_item', $paragraphs_item);
 $audio_url = $wrapper->field_audio_url->value();
 ?>
 
-<?php if (true || empty($audio_url)): ?>
+<?php if (TRUE || empty($audio_url)): ?>
 
 <div class="audio-preview <?php print $classes; ?>"<?php print $attributes; ?>>
     <?php print render($cover); ?>

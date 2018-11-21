@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ruleset name="loop">
+  <description>PHP CodeSniffer configuration for kreol</description>
+
+  <file>kreol.info</file>
+  <file>template.php</file>
+  <file>templates/</file>
+
+  <exclude-pattern>README.md</exclude-pattern>
+
+  <!-- Show progress -->
+  <arg value="p"/>
+
+  <rule ref="Drupal">
+    <exclude name="Drupal.InfoFiles.AutoAddedKeys.Project"/>
+  </rule>
+</ruleset>

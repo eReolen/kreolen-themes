@@ -1,13 +1,17 @@
 <?php
 
 /**
- * Implementation of hook_preprocess_page().
+ * @file
+ */
+
+/**
+ * Implements hook_preprocess_page().
  */
 function kreol_preprocess_page(&$variables) {
 }
 
 /**
- * Implementation of hook_preprocess_panels_pane().
+ * Implements hook_preprocess_panels_pane().
  */
 function kreol_preprocess_node(&$variables) {
   if (isset($variables['node'])) {
@@ -28,7 +32,7 @@ function kreol_preprocess_node(&$variables) {
         ];
 
         drupal_add_css(drupal_get_path('theme', 'kreol') . '/build/geofencing.css');
-        drupal_add_js('var geofencing_config = '.json_encode($geofencing_config).';', [
+        drupal_add_js('var geofencing_config = ' . json_encode($geofencing_config) . ';', [
           'type' => 'inline',
         ]);
         drupal_add_js(drupal_get_path('theme', 'kreol') . '/build/geofencing.js');
@@ -48,13 +52,17 @@ function kreol_preprocess_node(&$variables) {
           'footer' => 'Læs mere om hvorfor …',
         ]);
       }
-    } elseif ('kreol_campaign_tv' === $node->type) {
+    }
+    elseif ('kreol_campaign_tv' === $node->type) {
       drupal_add_css(drupal_get_path('theme', 'kreol') . '/build/navigation.css');
       drupal_add_js(drupal_get_path('theme', 'kreol') . '/build/navigation.js');
     }
   }
 }
 
+/**
+ *
+ */
 function kreol_theme($existing, $type, $theme, $path) {
   $items['campaign_geofencing'] = [
     'path' => $path . '/templates',

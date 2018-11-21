@@ -1,5 +1,13 @@
+<?php
+
+/**
+ * @file
+ */
+?>
 <div id="node-<?php print $node->nid; ?>" class="<?php print $classes; ?> clearfix"<?php print $attributes; ?>>
-  <?php if (isset($campaign_geofencing)) { echo $campaign_geofencing; } ?>
+  <?php if (isset($campaign_geofencing)) {
+    echo $campaign_geofencing;
+  } ?>
 
   <div class="header">
     <div class="header-logo">
