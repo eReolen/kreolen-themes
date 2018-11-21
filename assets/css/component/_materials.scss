@@ -1,13 +1,19 @@
-.paragraphs-item-campaign-materials {
-  @include heading;
-
-  .paragraphs-items-field-materials {
-    .field-items {
-      display: flex;
-      justify-content: space-between;
-
-      .field-item {
-        width: 225px;
+.paragraphs-items-field-materials {
+  .field-items {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    margin-left: -$spacer;
+    margin-right: -$spacer;
+    @include media-breakpoint-up(sm) {
+      flex-direction: row;
+      flex-wrap: wrap;
+    }
+    .field-item {
+      flex: 1 1 50%;
+      padding: $spacer;
+      @include media-breakpoint-up(md) {
+        flex: 1 1 25%;
       }
     }
   }

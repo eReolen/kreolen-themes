@@ -2,7 +2,6 @@
   .field-items {
     display: flex;
     flex-direction: column;
-    //padding: $spacer/2;
     @include media-breakpoint-up(sm) {
       flex-direction: row;
       flex-wrap: wrap;

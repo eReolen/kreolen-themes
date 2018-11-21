@@ -6,6 +6,6 @@
 ?>
 <div class="campaign-material">
     <?php print render($variables['cover']) ?>
-    <h2><?php print render($variables['title']) ?></h2>
+    <h3><?php print render($variables['title']) ?></h3>
     <?php print render($variables['author']) ?>
 </div>
