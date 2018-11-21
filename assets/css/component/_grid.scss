@@ -1,0 +1,13 @@
+/*
+* kreolen custom grid
+*/
+
+.container {
+  width: 100%;
+  padding-right: $spacer;
+  padding-left: $spacer;
+  margin-right: auto;
+  margin-left: auto;
+  @include make-container-max-widths();
+  //max-width: map-get($container-max-widths, sm);
+}

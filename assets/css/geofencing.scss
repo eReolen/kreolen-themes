@@ -3,8 +3,11 @@
 */
 
 // Components
+@import 'component/reset';
+@import 'component/variables';
 @import 'component/mixins';
 @import 'component/base';
+@import 'component/grid';
 @import 'component/header';
 @import 'component/footer';
 @import 'component/audio-book';

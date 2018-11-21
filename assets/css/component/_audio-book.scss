@@ -1,23 +1,17 @@
-// @TODO: Use flex stuff for this!
-$audio-books-spacing: 1em;
-
-.paragraphs-item-campaign-audio-books {
-  @include heading;
-
-  .paragraphs-items-field-audio-books {
-    @include clearfix;
-
-    .field-item {
-      width: 50%;
-      float: left;
-      padding-left: 0;
-      padding-right: $audio-books-spacing;
-      margin: $audio-books-spacing 0;
-
-      &:nth-child(2n) {
-        padding-left: $audio-books-spacing;
-        padding-right: 0;
-      }
+.paragraphs-items-field-audio-books {
+  .field-items {
+    display: flex;
+    flex-direction: column;
+    //padding: $spacer/2;
+    @include media-breakpoint-up(sm) {
+      flex-direction: row;
+      flex-wrap: wrap;
     }
+    margin-left: -$spacer/2;
+    margin-right: -$spacer/2;
+  }
+  .field-item {
+    flex: 1 1 50%;
+    padding: $spacer/2;
   }
 }

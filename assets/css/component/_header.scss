@@ -1,15 +1,34 @@
 .header {
+  .container {
+    display: flex;
+    flex-direction: column;
+    @include media-breakpoint-up(sm) {
+      flex-direction: row;
+    }
+  }
   background-color: $color-primary;
-  color: $color-white;
-  display: flex;
   padding-top: $spacer/2;
   padding-bottom: $spacer/2;
-  padding-left: $spacer;
-  padding-right: $spacer;
+  margin-bottom: $spacer;
   &-logo {
-    width: 20%;
+    flex: 1 1 50%;
+    @include media-breakpoint-up(sm) {
+      flex: 1 1 20%;
+    }
+    img {
+      max-height: $spacer;
+      @include media-breakpoint-up(sm) {
+        max-height: $spacer*2;
+      }
+    }
   }
   &-tagline {
-    float: right;
+    flex: 1 1 100%;
+    @include media-breakpoint-up(sm) {
+      text-align: right;
+    }
+    .lead {
+      color: $color-white;
+    }
   }
 }

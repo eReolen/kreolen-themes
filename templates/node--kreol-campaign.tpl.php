@@ -8,21 +8,24 @@
   <?php if (isset($campaign_geofencing)) {
     echo $campaign_geofencing;
   } ?>
-
   <div class="header">
-    <div class="header-logo">
-      <img src="/<?php print path_to_theme(); ?>/images/eReolen_Logo.svg" alt="<?php print t('Hjem') ?>" id="logo" />
-    </div>
-    <div class="header-tagline">
-      <?php print render($content['field_tagline'][0]); ?>
+    <div class="container">
+      <div class="header-logo">
+        <img src="/<?php print path_to_theme(); ?>/images/eReolen_Logo.svg" alt="<?php print t('Hjem') ?>" id="logo" />
+      </div>
+      <div class="header-tagline">
+        <p class="lead"><?php print render($content['field_tagline'][0]); ?></p>
+      </div>
     </div>
   </div>
-
-  <div class="content"<?php echo $content_attributes; ?>>
-    <?php echo render($content['field_paragraphs']); ?>
+  <div class="content"<?php print $content_attributes; ?>>
+    <div class="container">
+      <?php print render($content['field_paragraphs']); ?>
+    </div>
   </div>
-
   <div class="footer">
-    <?php echo render($content['field_footer']); ?>
+    <div class="container">
+      <?php print render($content['field_footer']); ?>
+    </div>
   </div>
 </div>
