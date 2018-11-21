@@ -55,17 +55,12 @@ require('../css/geofencing.scss');
   let config = {}
 
   $(() => {
-    const el = document.getElementById('campaign-geofencing-config')
-    try {
-        config = JSON.parse(el.innerHTML)
-    } catch (e) {
-    }
+    // Get global geofencing config.
+    config = geofencing_config || {}
 
     showStep('message')
     $('#geofencing-accept').on('click', getLocation)
     $('#geofencing-decline').on('click', declined)
-    // $('#geofencing-decline').on('click', getLocation)
-
   })
 
   // https://stackoverflow.com/a/13841047
