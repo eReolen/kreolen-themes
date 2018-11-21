@@ -1,4 +1,4 @@
-//import '../css/geofencing.scss'
+require('../css/geofencing.scss');
 
 (function ($) {
   const showStep = (index) => {

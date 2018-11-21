@@ -1,12 +1,14 @@
 /*
-* Create stylesheet for generel campaignsite
+* Create stylesheet for campaignsite for PowerNet tv solution
 */
+
 
 // Components
 @import 'component/mixins';
 @import 'component/base';
 @import 'component/header';
-@import 'component/footer';
 @import 'component/audio-book';
 @import 'component/materials';
 @import 'component/text';
+@import 'component/navigation';
+

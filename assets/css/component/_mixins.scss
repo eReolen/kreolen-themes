@@ -1,0 +1,17 @@
+@mixin clearfix {
+  &:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+}
+
+@mixin heading {
+  .heading {
+    font-family: "SourceSansProLight", sans-serif;
+    font-size: 1.5rem;
+    color: #505050;
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+}

@@ -1,1 +1,1 @@
-{"entrypoints":{"kreol":{"css":["build/kreol.css"],"js":["build/kreol.js"]},"geofencing":{"js":["build/geofencing.js"]},"navigation":{"js":["build/navigation.js"]}}}
+{"entrypoints":{"kreol":{"css":["build/kreol.css"],"js":["build/kreol.js"]},"geofencing":{"css":["build/geofencing.css"],"js":["build/geofencing.js"]},"navigation":{"css":["build/navigation.css"],"js":["build/navigation.js"]}}}

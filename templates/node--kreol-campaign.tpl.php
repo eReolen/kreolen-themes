@@ -22,7 +22,12 @@
   ?>
 
   <div class="header">
-    <?php print render($content['field_tagline']); ?>
+    <div class="header-logo">
+      <img src="/<?php print path_to_theme(); ?>/images/eReolen_Logo.svg" alt="<?php print t('Hjem') ?>" id="logo" />
+    </div>
+    <div class="header-tagline">
+      <?php print render($content['field_tagline'][0]); ?>
+    </div>
   </div>
 
   <div class="content"<?php print $content_attributes; ?>>

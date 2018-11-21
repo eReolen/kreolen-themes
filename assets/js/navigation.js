@@ -1,3 +1,4 @@
+require('../css/navigation.scss');
 import GridNavigation from './modules/navigation'
 
 window.addEventListener('load', function() {
