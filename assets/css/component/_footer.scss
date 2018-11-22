@@ -1,6 +1,18 @@
 .footer {
   background-color: $color-gray-900;
-  color: $color-white;
-  padding-top: $spacer*2;
   padding-bottom: $spacer*2;
+  h3, p {
+    color: $color-white;
+  }
+  .container {
+    margin-top: $spacer*2;
+  }
+  .brand {
+    width: 100%;
+    background-color: $color-white;
+    color: $color-primary;
+    text-align: center;
+    padding: $spacer 0;
+    margin-bottom: $spacer*2;
+  }
 }

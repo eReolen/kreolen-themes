@@ -24,6 +24,9 @@
     </div>
   </div>
   <div class="footer">
+    <div class="brand">
+      <?php print t('Bibliotekernes e-bøger og netlydbøger') ?>
+    </div>
     <div class="container">
       <?php print render($content['field_footer']); ?>
     </div>
