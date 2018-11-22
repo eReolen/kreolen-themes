@@ -8,6 +8,8 @@ window.addEventListener('load', function() {
   stuff.style.padding = '1em'
   stuff.style.backgroundColor = 'yellow'
   stuff.style.color = 'black'
+  stuff.style.zIndex = '21'
+  stuff.style.opacity = '.9'
   document.body.appendChild(stuff)
 
   const navigation = new GridNavigation('.paragraphs-item-campaign-audio-book', {
