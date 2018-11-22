@@ -2,11 +2,11 @@
 * Create stylesheet for campaignsite for PowerNet tv solution
 */
 
-
 // Components
 @import 'component/reset';
 @import 'component/variables';
 @import 'component/mixins';
+@import 'component/breakpoints';
 @import 'component/base';
 @import 'component/grid';
 @import 'component/header';
@@ -14,4 +14,22 @@
 @import 'component/materials';
 @import 'component/text';
 @import 'component/navigation';
+@import 'component/audio-player';
 
+
+/*
+* Overrides for TV template
+*/
+
+// Set container to use the full width of the screen
+.container {
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+.paragraphs-items-field-audio-books .field-item {
+  flex: 1 1 33%;
+  img {
+    max-height: 150px;
+  }
+}

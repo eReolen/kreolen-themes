@@ -2,5 +2,3 @@ name = Kreol
 description = The Kreol theme
 core = 7.x
 base theme = orwell
-
-stylesheets[all][] = build/kreol.css

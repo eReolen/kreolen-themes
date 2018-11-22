@@ -1,0 +1,79 @@
+.audio-player {
+  display: flex;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  z-index: 1;
+  background-color: $color-gray-900;
+  padding: $spacer;
+  &-btn {
+    align-self: flex-start;
+    margin-right: $spacer;
+    &-play {
+      font-size: 0;
+      color: $color-white;
+      border: 1px solid $color-white;
+      border-radius: 50%;
+      background: none;
+      padding: 1rem;
+      vertical-align: middle;
+      flex: none;
+      &:before {
+        font-family: "icomoon";
+        speak: none;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        font-style: normal;
+        font-weight: normal;
+        font-variant: normal;
+        text-transform: none;
+        position: relative;
+        left: 1px;
+        font-size: 1.5rem;
+        content: "";
+      }
+    }
+  }
+  &-info {
+    flex: 1 1 100%;
+    display: flex;
+    flex-direction: column;
+    margin-right: $spacer;
+  }
+  &-title {
+    flex: 1 1 100%;
+    color: $color-white;
+    font-size: $spacer*1.5;
+  }
+  &-progress {
+    flex: 1 1 100%;
+    display: flex;
+    flex-direction: column;
+    &-bar {
+      height: 3px;
+      width: 100%;
+      background-color: #fff;
+      order: 2;
+      &-elapsed {
+        height: 100%;
+        width: 30px;
+        background-color: #b81b40;
+      }
+    }
+    &-time {
+      flex: 1 1 100%;
+      text-align: right;
+      color: $color-white;
+      font-size: $spacer*1.5;
+      &-length {
+        color: $color-gray-500;
+      }
+    }
+  }
+  &-cover {
+    align-self: flex-end;
+    img {
+      max-height: 65px;
+    }
+  }
+}

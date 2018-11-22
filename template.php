@@ -52,6 +52,10 @@ function kreol_preprocess_node(&$variables) {
           'footer' => 'Læs mere om hvorfor …',
         ]);
       }
+      else {
+        drupal_add_css(drupal_get_path('theme', 'kreol') . '/build/kreol.css');
+        drupal_add_js(drupal_get_path('theme', 'kreol') . '/build/kreol.js');
+      }
     }
     elseif ('kreol_campaign_tv' === $node->type) {
       drupal_add_css(drupal_get_path('theme', 'kreol') . '/build/navigation.css');

@@ -8,6 +8,9 @@ h2, .lead {
   margin-bottom: $spacer;
 }
 h3 {
+  font-family: $font-family-sans-serif;
   font-weight: 900;
+  font-size: $spacer*2;
+  color: $color-gray-500;
   padding-bottom: $spacer;
 }

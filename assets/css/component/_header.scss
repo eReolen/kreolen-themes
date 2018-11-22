@@ -24,11 +24,13 @@
   }
   &-tagline {
     flex: 1 1 100%;
+    align-self: center;
     @include media-breakpoint-up(sm) {
       text-align: right;
     }
     .lead {
       color: $color-white;
+      margin-bottom: 0;
     }
   }
 }
