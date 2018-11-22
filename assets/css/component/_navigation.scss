@@ -1,22 +1,10 @@
-// body {
-//   overflow: hidden;
-// }
-
-$cursor-border-width: 2px;
-$cursor-padding: 4px;
-
 .cursor {
   box-sizing: content-box;
-  // box-sizing: border-box;
   position: absolute;
-  border: solid $cursor-border-width orange;
-  border-radius: 2*$cursor-border-width;
-
-  padding: $cursor-padding;
-  margin-left: -$cursor-padding - $cursor-border-width;
-  margin-top: -$cursor-padding - $cursor-border-width;
-
-  transition-property: all;
+  border-radius: 0;
+  box-shadow: 0 0 0 $spacer/2 $color-primary;
+  transition-property: top, left, bottom, right;
   transition-duration: 0.25s;
   transition-timing-function: ease-in-out;
+  z-index: 22;
 }

@@ -10,7 +10,7 @@ window.addEventListener('load', function() {
   stuff.style.color = 'black'
   document.body.appendChild(stuff)
 
-  const navigation = new GridNavigation('.paragraphs-item-campaign-audio-books .field-name-field-audio-books .field-item > div', {
+  const navigation = new GridNavigation('.paragraphs-item-campaign-audio-book', {
     currentClass: 'kreol-campaign-current'
   })
 
