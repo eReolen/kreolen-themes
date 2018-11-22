@@ -38,18 +38,19 @@ function kreol_preprocess_node(&$variables) {
         drupal_add_js(drupal_get_path('theme', 'kreol') . '/build/geofencing.js');
 
         $variables['campaign_geofencing'] = theme('campaign_geofencing', [
-          'header' => 'For at få adgang til lydbøgerne …',
+          'header' => 'Accepter anmodning om at kende din lokation',
+          'lead' => 'For at få adgang til lydbøgerne skal du acceptere at vi må kende din lokation. Tryk på Accepter i den lille popup ved adresselinjen her i browseren.<br>Hvis du vælger at blokere kan du <b>ikke</b> få adgang.',
           'buttons' => [
-            'accept' => 'OK',
-            'decline' => 'Glem det!',
+            'accept' => 'Accepter betingelserne og fortsæt',
+            'decline' => 'Nej tak, jeg ønkser ikke at lytte til gratis lydbøger',
           ],
           'getting_location' => 'Henter din placering …',
           'checking_location' => 'Tjekker din placering …',
-          'unknown_location' => 'Vi kan desværre ikke finde din placering.',
+          'unknown_location' => 'Det var ikke muligt at finde din placering.',
           'access_granted' => 'Velkommen. Du har nu adgang til lydbøgerne.',
-          'access_denied' => 'Du er desværre ikke på hospitalet!',
+          'access_denied' => 'Ifølge din placering er du ikke på hospitalet.',
           'geofencing_declined' => 'Ærgerligt. Du kan altid finde spændende e- og lydbøger på <a href="https://ereolen.dk">eReolen</a>.',
-          'footer' => 'Læs mere om hvorfor …',
+          'footer' => 'Læs mere om hvorfor vi skal kende din lokation og hvordan vi håndrete dine data. <a href="http://www.ereolen.dk/datahåndtering">Sådan bruger vi dine data</a>',
         ]);
       }
       else {
