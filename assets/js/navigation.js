@@ -1,26 +1,100 @@
 require('../css/navigation.scss');
 import GridNavigation from './modules/navigation'
 
+if ('undefined' === typeof gSTB) {
+  var gSTB = {
+    Continue: () => {},
+    GetMediaLen: () => 53501,
+    GetMute: () => 0,
+    GetPosPercent: () => 42,
+    GetPosTime: () => 87,
+    GetVolume: () => {},
+    InitPlayer: () => {},
+    IsPlaying: () => true,
+    Pause: () => {},
+    Play: () => {},
+    SetMute: () => {},
+    SetPosTime: () => {},
+    SetVolume: () => {},
+    Stop: () => {},
+  }
+}
+
+const formatTime = (time) => {
+  const seconds = time%60;
+  time = Math.floor(time/60)
+  const minutes = time%60;
+  time = Math.floor(time/60)
+  const hours = time
+
+  return [hours.toFixed(0), ('0'+minutes.toFixed(0)).slice(-2), ('0'+seconds.toFixed(0)).slice(-2)].join(':')
+}
+
 window.addEventListener('load', function() {
-  var stuff = document.createElement('pre')
-  stuff.style.position = 'absolute'
-  stuff.style.bottom = stuff.style.left = stuff.style.right = 0
-  stuff.style.padding = '1em'
-  stuff.style.backgroundColor = 'yellow'
-  stuff.style.color = 'black'
-  stuff.style.zIndex = '21'
-  stuff.style.opacity = '.9'
-  document.body.appendChild(stuff)
+	const stb = gSTB
+
+  const debugContainer = document.createElement('pre')
+  debugContainer.style.position = 'absolute'
+  debugContainer.style.top = debugContainer.style.left = debugContainer.style.right = 0
+  debugContainer.style.padding = '1em'
+  debugContainer.style.backgroundColor = 'yellow'
+  debugContainer.style.color = 'black'
+  debugContainer.style.zIndex = 1000
+  document.body.appendChild(debugContainer)
+
+  const DEBUG = (...args) => {
+    debugContainer.innerHTML = args.map((arg) => JSON.stringify(arg, null, 2)).join('\n')
+  }
+
+  const playerContainer = document.createElement('pre')
+  playerContainer.style.position = 'absolute'
+  playerContainer.style.left = playerContainer.style.right = 0
+  playerContainer.style.bottom = 200
+  playerContainer.style.padding = '1em'
+  playerContainer.style.backgroundColor = 'yellow'
+  playerContainer.style.color = 'black'
+  playerContainer.style.zIndex = 1000
+  document.body.appendChild(playerContainer)
+
+  const PLAYER = (...args) => {
+    playerContainer.innerHTML = args.map(JSON.stringify)
+  }
+
+  document.querySelector('.audio-player').style.visibility = 'hidden'
+
+  const initPlayer = (data) => {
+    document.querySelector('.audio-player').style.visibility = 'visible'
+    document.querySelector('.audio-player-title').innerHTML = data.artist
+    document.querySelector('.audio-player-cover img').src = data.cover
+
+    document.querySelector('.audio-player-progress-time-elapsed').innerHTML = formatTime(0)
+    document.querySelector('.audio-player-progress-time-length').innerHTML = formatTime(data.duration)
+    document.querySelector('.audio-player-progress-bar-elapsed').style.width = '0'
+  }
+
+  setInterval(() => {
+    PLAYER(
+      formatTime(stb.GetPosTime()),
+      stb.GetPosTime(),
+      formatTime(stb.GetMediaLen()),
+      stb.GetMediaLen(),
+      stb.GetPosPercent()
+    )
+
+    document.querySelector('.audio-player-progress-time-elapsed').innerHTML = formatTime(stb.GetPosTime())
+    document.querySelector('.audio-player-progress-time-length').innerHTML = formatTime(stb.GetMediaLen())
+    document.querySelector('.audio-player-progress-bar-elapsed').style.width = stb.GetPosPercent()+'%'
+  }, 1000)
 
   const navigation = new GridNavigation('.paragraphs-item-campaign-audio-book', {
     currentClass: 'kreol-campaign-current'
   })
 
   document.addEventListener('keydown', function (e) {
-    stuff.innerHTML = JSON.stringify({
+    DEBUG({
       // 'key': e.key,
       'keyCode': e.keyCode
-    }, null, 2)
+    })
 
     switch (e.keyCode) {
     case 8: // BACK
@@ -30,6 +104,7 @@ window.addEventListener('load', function() {
       break
 
     case 89: // INFO
+      PLAYER(audio)
       break
 
     case 40: // DOWN
@@ -51,107 +126,67 @@ window.addEventListener('load', function() {
     case 13: // ENTER/OK
     case 32: // SPACE
       const element = navigation.select()
-      stuff.innerHTML = 'Play audio book'
+      const audioUrl = element.getAttribute('data-audio-url')
+      const audioData = JSON.parse(element.getAttribute('data-audio-data'))
 
-      const audioUrl = 'https://audio.api.streaming.pubhub.dk/Play.ashx?o=942aad16-d9bc-4726-a76d-5c1094bb28f8'
-			const stb = gSTB
-			stb.Stop()
-			stb.InitPlayer()
-			stb.Play(audioUrl)
+      initPlayer(audioData)
+      DEBUG('Play audio book', audioUrl, audioData)
+
+      // const audioUrl = 'https://audio.api.streaming.pubhub.dk/Play.ashx?o=942aad16-d9bc-4726-a76d-5c1094bb28f8'
+      try {
+        stb.Stop()
+        stb.InitPlayer()
+        stb.Play(audioUrl)
+      } catch (ex) {
+        DEBUG('exception', ex.message)
+      }
 
       break
 
     case 33: // PREV TRACK
     case 34: // NEXT TRACK
+      break
 
     case 107: // VOLUME UP
-    case 109: // VOLUME DOWN
-    case 192: // MUTE
+			stb.SetVolume(Math.min(stb.GetVolume()+10, 100))
+      break
 
+    case 109: // VOLUME DOWN
+			stb.SetVolume(Math.max(stb.GetVolume()-10, 0))
+      break
+
+    case 192: // MUTE
+			stb.SetMute(0 === stb.GetMute() ? 1 : 0)
+      break
 
     case 82: // PLAY/PAUSE
+      DEBUG(stb.IsPlaying())
+			if (stb.IsPlaying()) {
+				stb.Pause()
+			} else {
+				stb.Continue()
+			}
+      break
+
     case 66: // SKIP BACKWARD
+			stb.SetPosTime(Math.max(stb.GetPosTime() - 30, 0))
+      break
+
     case 70: // SKIP FORWARD
+			stb.SetPosTime(Math.min(stb.GetPosTime() + 30, stb.GetMediaLen()))
+      break
+
     case 83: // STOP
+      stb.Stop()
       break
 
     case 116:
-      stuff.innerHTML = 'Reloading …'
-      location.href = location.href
+      DEBUG('Reloading …')
+      stb.Stop()
+      location.reload(true)
       break
     }
   })
+
+  DEBUG('Ready')
 })
-
-
-
-// (function ($) {
-//   if ('undefined' === typeof stbWebWindow) {
-//     var stbWebWindow = {
-//       close: () => {}
-//     }
-//   }
-
-//   $(() => {
-//     alert('ready')
-//     setTimeout(() => {
-//       const navigation = new GridNavigation('.paragraphs-item-campaign-audio-books .field-name-field-audio-books .field-item > div', {
-//         currentClass: 'kreol-campaign-current'
-//       })
-
-//       const stuff = document.createElement('pre')
-//       stuff.style.position = 'absolute'
-//       stuff.style.bottom = stuff.style.left = stuff.style.right = 0
-//       stuff.style.padding = '1em'
-//       stuff.style.backgroundColor = 'yellow'
-//       stuff.style.color = 'black'
-//       document.body.appendChild(stuff)
-
-//       alert(87)
-
-//       document.addEventListener('keydown', function(event) {
-//         stuff.innerHTML = JSON.stringify({
-//           'key': event.key,
-//           'keyCode': event.keyCode
-//         }, null, 2)
-
-
-//         if (116 === event.keyCode) {
-//           // Reload
-//           location.href = location.href
-//           return
-//         }
-
-//         switch (event.key) {
-//         case 'Escape':
-//           stbWebWindow.close()
-//           break
-//         case 'ArrowDown':
-//           navigation.move(GridNavigation.DOWN)
-//           break
-//         case 'ArrowLeft':
-//           navigation.move(GridNavigation.LEFT)
-//           break
-//         case 'ArrowRight':
-//           navigation.move(GridNavigation.RIGHT)
-//           break
-//         case 'ArrowUp':
-//           navigation.move(GridNavigation.UP)
-//           break
-//         case 'Enter':
-//         case ' ':
-//           const element = navigation.select()
-//           ;;; console.log('select', element)
-//           break
-//         default:
-//           if (!isNaN(parseInt(event.key))) {
-//             navigation.moveTo(parseInt(event.key)-1)
-//           }
-//           break
-//         }
-//       })
-
-//       alert(42)
-//     }, 1000)
-//   })
-// }(jQuery))

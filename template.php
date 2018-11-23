@@ -11,7 +11,7 @@ function kreol_preprocess_page(&$variables) {
 }
 
 /**
- * Implements hook_preprocess_panels_pane().
+ * Implements hook_preprocess_node().
  */
 function kreol_preprocess_node(&$variables) {
   if (isset($variables['node'])) {
@@ -61,6 +61,27 @@ function kreol_preprocess_node(&$variables) {
     elseif ('kreol_campaign_tv' === $node->type) {
       drupal_add_css(drupal_get_path('theme', 'kreol') . '/build/navigation.css');
       drupal_add_js(drupal_get_path('theme', 'kreol') . '/build/navigation.js');
+    }
+  }
+}
+
+/**
+ * Implements hook_preprocess_entity().
+ */
+function kreol_preprocess_entity(&$variables) {
+  if ('paragraphs_item' === $variables['entity_type']) {
+    if ('campaign_audio_book' === $variables['paragraphs_item']->bundle()) {
+      $wrapper = entity_metadata_wrapper($variables['entity_type'], $variables['paragraphs_item']);
+      $audio_data = json_decode($wrapper->field_audio_data->value(), TRUE);
+      if (isset($audio_data['duration'])) {
+        $epoch = new \DateTime('@0');
+        $time = new \DateTime('@'.$audio_data['duration']);
+        $audio_data['duration_formatted'] = $epoch->diff($time)->format('%h:%I:%S');
+      }
+      $variables['title'] = $audio_data['title'];
+      $variables['author'] = $audio_data['artist'];
+      $variables['audio_data'] = $audio_data;
+      $variables['audio_url'] = $wrapper->field_audio_url->value();
     }
   }
 }

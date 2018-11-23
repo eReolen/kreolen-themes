@@ -32,7 +32,8 @@
         </div>
         <div class="audio-player-progress-time">
           <span class="audio-player-progress-time-elapsed">00.00</span>
-          <span class="audio-player-progress-time-length"> / 04.26</span>
+                  /
+          <span class="audio-player-progress-time-length">04.26</span>
         </div>
       </div>
     </div>
