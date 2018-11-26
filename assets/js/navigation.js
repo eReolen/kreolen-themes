@@ -1,8 +1,18 @@
-require('../css/navigation.scss');
 import GridNavigation from './modules/navigation'
+import DOMHelper from './modules/dom-helper'
 
-if ('undefined' === typeof gSTB) {
-  var gSTB = {
+require('../css/navigation.scss');
+
+// Skip backward/forward in seconds
+const SKIP_DELTA = 30 * 60
+
+// Volume up/down step
+const VOLUME_DELTA = 10
+
+try {
+  gSTB
+} catch {
+  window.gSTB = {
     Continue: () => {},
     GetMediaLen: () => 53501,
     GetMute: () => 0,
@@ -31,38 +41,26 @@ const formatTime = (time) => {
 }
 
 window.addEventListener('load', function() {
-	const stb = gSTB
+  const stb = gSTB
 
-  const debugContainer = document.createElement('pre')
-  debugContainer.style.position = 'absolute'
-  debugContainer.style.top = debugContainer.style.left = debugContainer.style.right = 0
-  debugContainer.style.padding = '1em'
-  debugContainer.style.backgroundColor = 'yellow'
-  debugContainer.style.color = 'black'
-  debugContainer.style.zIndex = 1000
-  document.body.appendChild(debugContainer)
+  // const debugContainer = document.createElement('pre')
+  // debugContainer.style.position = 'absolute'
+  // debugContainer.style.top = debugContainer.style.left = debugContainer.style.right = 0
+  // debugContainer.style.padding = '1em'
+  // debugContainer.style.backgroundColor = 'yellow'
+  // debugContainer.style.color = 'black'
+  // debugContainer.style.zIndex = 1000
+  // document.body.appendChild(debugContainer)
 
   const DEBUG = (...args) => {
-    debugContainer.innerHTML = args.map((arg) => JSON.stringify(arg, null, 2)).join('\n')
-  }
-
-  const playerContainer = document.createElement('pre')
-  playerContainer.style.position = 'absolute'
-  playerContainer.style.left = playerContainer.style.right = 0
-  playerContainer.style.bottom = 200
-  playerContainer.style.padding = '1em'
-  playerContainer.style.backgroundColor = 'yellow'
-  playerContainer.style.color = 'black'
-  playerContainer.style.zIndex = 1000
-  document.body.appendChild(playerContainer)
-
-  const PLAYER = (...args) => {
-    playerContainer.innerHTML = args.map(JSON.stringify)
+    // debugContainer.innerHTML = args.map((arg) => JSON.stringify(arg, null, 2)).join('\n')
   }
 
   document.querySelector('.audio-player').style.visibility = 'hidden'
 
   const initPlayer = (data) => {
+    try {
+
     document.querySelector('.audio-player').style.visibility = 'visible'
     document.querySelector('.audio-player-title').innerHTML = data.artist
     document.querySelector('.audio-player-cover img').src = data.cover
@@ -70,21 +68,53 @@ window.addEventListener('load', function() {
     document.querySelector('.audio-player-progress-time-elapsed').innerHTML = formatTime(0)
     document.querySelector('.audio-player-progress-time-length').innerHTML = formatTime(data.duration)
     document.querySelector('.audio-player-progress-bar-elapsed').style.width = '0'
+
+    } catch (ex) {
+      DEBUG('exception', ex.message)
+    }
   }
 
-  setInterval(() => {
-    PLAYER(
+  const startPlayer = (element) => {
+    const audioUrl = element.getAttribute('data-audio-url')
+    const audioData = JSON.parse(element.getAttribute('data-audio-data'))
+
+    initPlayer(audioData)
+    DEBUG('Play audio book', audioUrl, audioData)
+
+    try {
+      stb.Stop()
+      stb.InitPlayer()
+      stb.Play(audioUrl)
+    } catch (ex) {
+      DEBUG('exception', ex.message)
+    }
+  }
+
+  const stopPlayer = () => {
+    stb.Stop()
+  }
+
+  const updatePlayer = () => {
+    DEBUG([
+      new Date(),
       formatTime(stb.GetPosTime()),
       stb.GetPosTime(),
       formatTime(stb.GetMediaLen()),
       stb.GetMediaLen(),
       stb.GetPosPercent()
-    )
+    ])
 
+    if (stb.IsPlaying()) {
+      DOMHelper.addClass(document.querySelector('.audio-player'), 'is-playing')
+    } else {
+      DOMHelper.removeClass(document.querySelector('.audio-player'), 'is-playing')
+    }
     document.querySelector('.audio-player-progress-time-elapsed').innerHTML = formatTime(stb.GetPosTime())
     document.querySelector('.audio-player-progress-time-length').innerHTML = formatTime(stb.GetMediaLen())
     document.querySelector('.audio-player-progress-bar-elapsed').style.width = stb.GetPosPercent()+'%'
-  }, 1000)
+  }
+
+  setInterval(updatePlayer, 500)
 
   const navigation = new GridNavigation('.paragraphs-item-campaign-audio-book', {
     currentClass: 'kreol-campaign-current'
@@ -104,7 +134,7 @@ window.addEventListener('load', function() {
       break
 
     case 89: // INFO
-      PLAYER(audio)
+      // DEBUG(audio)
       break
 
     case 40: // DOWN
@@ -125,22 +155,7 @@ window.addEventListener('load', function() {
 
     case 13: // ENTER/OK
     case 32: // SPACE
-      const element = navigation.select()
-      const audioUrl = element.getAttribute('data-audio-url')
-      const audioData = JSON.parse(element.getAttribute('data-audio-data'))
-
-      initPlayer(audioData)
-      DEBUG('Play audio book', audioUrl, audioData)
-
-      // const audioUrl = 'https://audio.api.streaming.pubhub.dk/Play.ashx?o=942aad16-d9bc-4726-a76d-5c1094bb28f8'
-      try {
-        stb.Stop()
-        stb.InitPlayer()
-        stb.Play(audioUrl)
-      } catch (ex) {
-        DEBUG('exception', ex.message)
-      }
-
+      startPlayer(navigation.select())
       break
 
     case 33: // PREV TRACK
@@ -148,36 +163,36 @@ window.addEventListener('load', function() {
       break
 
     case 107: // VOLUME UP
-			stb.SetVolume(Math.min(stb.GetVolume()+10, 100))
+      stb.SetVolume(Math.min(stb.GetVolume() + VOLUME_DELTA, 100))
       break
 
     case 109: // VOLUME DOWN
-			stb.SetVolume(Math.max(stb.GetVolume()-10, 0))
+     stb.SetVolume(Math.max(stb.GetVolume() - VOLUME_DELTA, 0))
       break
 
     case 192: // MUTE
-			stb.SetMute(0 === stb.GetMute() ? 1 : 0)
+     stb.SetMute(0 === stb.GetMute() ? 1 : 0)
       break
 
     case 82: // PLAY/PAUSE
       DEBUG(stb.IsPlaying())
-			if (stb.IsPlaying()) {
-				stb.Pause()
-			} else {
-				stb.Continue()
-			}
+     if (stb.IsPlaying()) {
+       stb.Pause()
+     } else {
+       stb.Continue()
+     }
       break
 
     case 66: // SKIP BACKWARD
-			stb.SetPosTime(Math.max(stb.GetPosTime() - 30, 0))
+     stb.SetPosTime(Math.max(stb.GetPosTime() - SKIP_DELTA, 0))
       break
 
     case 70: // SKIP FORWARD
-			stb.SetPosTime(Math.min(stb.GetPosTime() + 30, stb.GetMediaLen()))
+     stb.SetPosTime(Math.min(stb.GetPosTime() + SKIP_DELTA, stb.GetMediaLen()))
       break
 
     case 83: // STOP
-      stb.Stop()
+      stopPlayer()
       break
 
     case 116:
