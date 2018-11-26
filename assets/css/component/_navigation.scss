@@ -5,12 +5,10 @@
   border: solid $spacer/2 $color-primary;
   margin: {
     top: -$spacer/2;
-    right: 0;
-    bottom: 0;
+    right: $spacer;
+    bottom: $spacer;
     left: -$spacer/2;
   }
-  padding-right: $spacer;
-  padding-bottom: $spacer;
   transition-property: top, left, bottom, right;
   transition-duration: 0.25s;
   transition-timing-function: ease-in-out;
