@@ -3,8 +3,6 @@
   "build/geofencing.js": "/build/geofencing.js",
   "build/kreol.css": "/build/kreol.css",
   "build/kreol.js": "/build/kreol.js",
-  "build/navigation.js": "/build/navigation.js",
   "build/navigation.css": "/build/navigation.css",
-  "build/images/audio-payer-icon_pause.png": "/build/images/audio-payer-icon_pause.7b46257d.png",
-  "build/images/audio-payer-icon_play.png": "/build/images/audio-payer-icon_play.a80acb6d.png"
+  "build/navigation.js": "/build/navigation.js"
 }

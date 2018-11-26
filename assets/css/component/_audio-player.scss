@@ -39,7 +39,7 @@
         background-size: $spacer*4;
         background-image: url("/sites/all/themes/kreol/images/audio-payer-icon_play.png");
       }
-      &.pause {
+      .is-playing & {
         &:before {
           background-image: url("/sites/all/themes/kreol/images/audio-payer-icon_pause.png");
         }
