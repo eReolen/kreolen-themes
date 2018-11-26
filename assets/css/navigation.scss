@@ -27,12 +27,20 @@
   max-width: 100% !important;
 }
 
+/*
+* Since we do not have flexbox support on over tv device we use the below styling
+*/
+
+// Set width of audiobook items. And a max height to have all info visible on screen, without scroll.
 .paragraphs-items-field-audio-books .field-item {
   flex: 1 1 33%;
+  width: 33%;
   img {
     max-height: 150px;
   }
 }
+
+// show correct font and set a more readable font size for TV
 .field-type-text-with-summary {
   h3 {
     font-family: $font-family-sans-serif;
@@ -41,6 +49,26 @@
   line-height: 1.4;
 }
 
+// For the cursor to obtain the correct size, we set an initial height of the audiobook cover.
+.audio-preview .ting-cover-wrapper {
+  min-width: auto;
+  max-height: 150px;
+}
+
+// Set widths of the player elements
+.audio-player-btn {
+  width: 10%;
+  float: left;
+}
+.audio-player-info {
+  width: 75%;
+  float: left;
+}
+.audio-player-cover {
+  float: right;
+}
+
+// Hide cookie message popup
 #sliding-popup {
   display: none;
 }

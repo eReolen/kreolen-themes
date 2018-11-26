@@ -52,6 +52,7 @@
     &-bar {
       height: 3px;
       width: 100%;
+      margin-top: $spacer/4;
       background-color: #fff;
       order: 2;
       &-elapsed {
@@ -65,7 +66,7 @@
       text-align: right;
       color: $color-white;
       font-size: $spacer*1.5;
-      &-length {
+      &-separator, &-length {
         color: $color-gray-500;
       }
     }

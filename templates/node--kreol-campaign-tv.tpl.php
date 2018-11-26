@@ -27,13 +27,13 @@
     <div class="audio-player-info">
       <div class="audio-player-title">Spørg Søren</div>
       <div class="audio-player-progress">
-        <div class="audio-player-progress-bar">
-          <div class="audio-player-progress-bar-elapsed"></div>
-        </div>
         <div class="audio-player-progress-time">
           <span class="audio-player-progress-time-elapsed">00.00</span>
-          <span class="audio-player-progress-time-length">/</span>
+          <span class="audio-player-progress-time-seperator">/</span>
           <span class="audio-player-progress-time-length">04.26</span>
+        </div>
+        <div class="audio-player-progress-bar">
+          <div class="audio-player-progress-bar-elapsed"></div>
         </div>
       </div>
     </div>
