@@ -1,3 +1,5 @@
+/* global gSTB:false, stbWebWindow:false */
+
 import GridNavigation from './modules/navigation'
 import DOMHelper from './modules/dom-helper'
 
@@ -8,27 +10,6 @@ const SKIP_DELTA = 30 * 60
 
 // Volume up/down step
 const VOLUME_DELTA = 10
-
-try {
-  gSTB
-} catch {
-  window.gSTB = {
-    Continue: () => {},
-    GetMediaLen: () => 53501,
-    GetMute: () => 0,
-    GetPosPercent: () => 42,
-    GetPosTime: () => 87,
-    GetVolume: () => {},
-    InitPlayer: () => {},
-    IsPlaying: () => true,
-    Pause: () => {},
-    Play: () => {},
-    SetMute: () => {},
-    SetPosTime: () => {},
-    SetVolume: () => {},
-    Stop: () => {},
-  }
-}
 
 const formatTime = (time) => {
   const seconds = time%60;

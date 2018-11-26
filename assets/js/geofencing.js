@@ -1,3 +1,5 @@
+/* global geofencing_config:false, jQuery:false */
+
 require('../css/geofencing.scss');
 
 (function ($) {
