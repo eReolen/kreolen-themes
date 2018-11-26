@@ -32,6 +32,10 @@
 */
 
 // Add spacing around logo.
+.header {
+  float: left;
+  width: 100%;
+}
 .header-logo {
   padding-top: $spacer/4;
   width: auto;
