@@ -34,6 +34,13 @@
 // Add spacing around logo.
 .header-logo {
   padding-top: $spacer/4;
+  width: auto;
+  float: left;
+}
+.header-tagline {
+  padding-top: $spacer/4;
+  width: auto;
+  float: right;
 }
 
 // set to block for test without flex.
