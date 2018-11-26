@@ -5,8 +5,8 @@
   border: solid $spacer/2 $color-primary;
   margin: {
     top: -$spacer/2;
-    right: $spacer;
-    bottom: $spacer;
+    right: -$spacer/2;
+    bottom: -$spacer/2;
     left: -$spacer/2;
   }
   transition-property: top, left, bottom, right;
