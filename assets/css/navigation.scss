@@ -31,6 +31,12 @@
 * Since we do not have flexbox support on over tv device we use the below styling
 */
 
+// Add spacing around logo.
+.header-logo {
+  padding-top: $spacer/4;
+}
+
+// set to block for test without flex.
 .paragraphs-items-field-audio-books .field-items {
   display: block;
 }
