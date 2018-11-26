@@ -12,25 +12,37 @@
     &-play {
       font-size: 0;
       color: $color-white;
-      border: 1px solid $color-white;
-      border-radius: 50%;
+      border: none;
+      border-radius: 0;
       background: none;
-      padding: 1rem;
       vertical-align: middle;
       flex: none;
+      // &:before {
+      //   font-family: "icomoon";
+      //   speak: none;
+      //   -webkit-font-smoothing: antialiased;
+      //   -moz-osx-font-smoothing: grayscale;
+      //   font-style: normal;
+      //   font-weight: normal;
+      //   font-variant: normal;
+      //   text-transform: none;
+      //   position: relative;
+      //   left: 1px;
+      //   font-size: 1.5rem;
+      //   content: "";
+      // }
       &:before {
-        font-family: "icomoon";
-        speak: none;
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
-        font-style: normal;
-        font-weight: normal;
-        font-variant: normal;
-        text-transform: none;
-        position: relative;
-        left: 1px;
-        font-size: 1.5rem;
-        content: "";
+        content: "";
+        display: block;
+        width: $spacer*4;
+        height: $spacer*4;
+        background-size: $spacer*4;
+        background-image: url("/sites/all/themes/kreol/images/audio-payer-icon_play.png");
+      }
+      &.pause {
+        &:before {
+          background-image: url("/sites/all/themes/kreol/images/audio-payer-icon_pause.png");
+        }
       }
     }
   }
