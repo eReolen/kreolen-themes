@@ -31,10 +31,15 @@
 * Since we do not have flexbox support on over tv device we use the below styling
 */
 
+.paragraphs-items-field-audio-books .field-items {
+  display: block;
+}
+
 // Set width of audiobook items. And a max height to have all info visible on screen, without scroll.
 .paragraphs-items-field-audio-books .field-item {
   flex: 1 1 33%;
   width: 33%;
+  float: left;
   img {
     max-height: 150px;
   }
