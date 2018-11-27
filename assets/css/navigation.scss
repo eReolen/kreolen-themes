@@ -72,14 +72,14 @@
 }
 .audio-preview {
   &__title {
-    font-size: $spacer*1.25;
+    font-size: $spacer*1.5;
   }
   &__author {
-    font-size: $spacer;
+    font-size: $spacer*1.25;
   }
   &__duration {
-    font-size: $spacer;
-    color: $color-gray-500;
+    font-size: $spacer*1.25;
+    color: $color-gray-200;
   }
 }
 
