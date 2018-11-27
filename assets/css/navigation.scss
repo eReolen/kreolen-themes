@@ -71,15 +71,26 @@
   line-height: 1.4;
 }
 .audio-preview {
-  &__title {
+  &__title div {
     font-size: $spacer*1.5;
+    max-height: $spacer*3;
+    &:after {
+      top: $spacer*3;
+    }
   }
-  &__author {
+  &__author p {
     font-size: $spacer*1.25;
   }
   &__duration {
-    font-size: $spacer*1.25;
-    color: $color-gray-200;
+    .label {
+      font-size: $spacer;
+    }
+    .data {
+      font-size: $spacer*1.25;
+    }
+  }
+  .ting-cover-wrapper {
+    min-width: auto !important;
   }
 }
 

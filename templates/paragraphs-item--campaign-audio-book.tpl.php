@@ -13,10 +13,17 @@
     </div>
     <div class="audio-preview__details">
         <div class="audio-preview__meta">
-            <div class="audio-preview__title"><div><?php print $title; ?></div></div>
-            <div class="audio-preview__author"><?php print $author; ?></div>
+            <div class="audio-preview__title">
+              <div><?php print $title; ?></div>
+            </div>
+            <div class="audio-preview__author">
+              <p><?php print $author; ?></p>
+            </div>
             <?php if (isset($audio_data['duration_formatted'])): ?>
-              <div class="audio-preview__duration"><?php print $audio_data['duration_formatted']; ?></div>
+              <div class="audio-preview__duration">
+                <span class="label"><?php print t('Duration'); ?></span>
+                <span class="data"><?php print $audio_data['duration_formatted']; ?></span>
+              </div>
             <?php endif ?>
         </div>
         <div class="audio-preview__player">

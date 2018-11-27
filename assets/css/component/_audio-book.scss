@@ -14,3 +14,20 @@
     padding: $spacer/2;
   }
 }
+.audio-preview {
+  &__title div {
+    line-height: 1.1;
+  }
+  &__duration {
+    margin-top: $spacer/2;
+    .label {
+      font-size: $spacer*0.75;
+      color: $color-gray-300;
+      display: block;
+    }
+    .data {
+      font-size: $spacer*0.75;
+      color: $color-white;
+    }
+  }
+}
