@@ -45,4 +45,25 @@
       margin-right: 0;
     }
   }
+  .step {
+    display: none;
+    &-success, &-warning, &-danger {
+      padding: $spacer/2;
+      border-size: 1px;
+      border-style: solid;
+      border-radius: 2px;
+    }
+    &-success {
+      background-color: $color-green;
+      border-color: darken($color-green, 10%);
+    }
+    &-warning {
+      background-color: $color-yellow;
+      border-color: darken($color-yellow, 10%);
+    }
+    &-danger {
+      background-color: $color-orange;
+      border-color: darken($color-orange, 10%);
+    }
+  }
 }
