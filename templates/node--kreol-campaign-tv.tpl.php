@@ -41,4 +41,12 @@
       <img src="//placehold.it/400x600" alt="Placehold">
     </div>
   </div>
+  <div class="audio-continue-popup" style="display: none;">
+    <div class="container">
+      <div class="audio-continue-popup-content">
+        <button class="audio-continue-popup-btn audio-continue-popup-btn-continue"><?php print t('Continue listening') ?></button>
+        <button class="audio-continue-popup-btn audio-continue-popup-btn-restart"><?php print t('Restart') ?></button>
+      </div>
+    </div>
+  </div>
 </div>
