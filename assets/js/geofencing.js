@@ -1,10 +1,12 @@
 /* global geofencing_config:false, jQuery:false */
 
-require('../css/geofencing.scss');
+require('../css/geofencing.scss')
+
+import './kreol.js'
 
 (function ($) {
   const showStep = (index) => {
-    $('#geofencing').toggle(true)
+    $('#geofencing').addClass('show')
     $('#geofencing .step').toggle(false)
     $('#geofencing .step[data-step="'+index+'"]').toggle(true)
   }
@@ -82,54 +84,4 @@ require('../css/geofencing.scss');
   function toRad(number) {
     return number * Math.PI / 180
   }
-
-  // /** Converts numeric degrees to radians */
-  // if (typeof(Number.prototype.toRad) === "undefined") {
-  //   Number.prototype.toRad = function() {
-  //     return this * Math.PI / 180;
-  //   }
-  // }
 }(jQuery))
-
-// 'use strict';
-
-// import React from 'react'
-// import ReactDOM from 'react-dom';
-
-// const e = React.createElement;
-
-// class LikeButton extends React.Component {
-//   constructor(props) {
-//     super(props);
-//     this.state = { liked: false };
-//   }
-
-//   render() {
-//     if (this.state.liked) {
-//       return 'You liked this.'
-//     }
-
-//     return <fieldset>
-//       <legend>{this.props.title}</legend>
-//       {e(
-//         'button',
-//         { onClick: () => this.setState({ liked: true }) },
-//         'Like'
-//       )}
-//     </fieldset>
-//   }
-// }
-
-// // if ('geolocation' in navigator) {
-// //   navigator.geolocation.getCurrentPosition(
-// //     (position) => {
-// //       ;;; console.log(position)
-// //     },
-// //     (error) => {
-// //       ;;; console.log(error)
-// //     },
-// //   )
-// // }
-
-// const domContainer = document.querySelector('#app')
-// ReactDOM.render(e(LikeButton, {title: 'We need your location.'}), domContainer)

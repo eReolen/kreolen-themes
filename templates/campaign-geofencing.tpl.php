@@ -4,10 +4,10 @@
  * @file
  */
 ?>
-<div class="modal">
+<div class="modal modal-hidden" id="geofencing">
   <div class="container">
     <div class="modal-inner">
-      <div id="geofencing" class="geofencing">
+      <div class="geofencing">
         <img src="/<?php print path_to_theme(); ?>/images/globe.svg" alt="<?php print t('Globus') ?>"/>
         <?php if ($header): ?>
           <header>

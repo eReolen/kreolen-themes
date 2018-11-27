@@ -8,12 +8,27 @@
   bottom: 0;
   background-color: rgba(0,0,0,.8);
   z-index: 20;
-  display: flex;
+  display: none;
   align-items: center;
   justify-content: center;
   &-inner {
     background: $color-white;
     padding: $spacer*2;
     z-index: 21;
+    position: relative;
+  }
+
+  &.show {
+    display: flex;
+  }
+
+  .close {
+    // @TODO
+  }
+
+  iframe {
+    // @FIXME
+    width: 100%;
+    min-height: 24rem;
   }
 }
