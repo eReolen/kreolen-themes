@@ -38,6 +38,16 @@ Encore
 
     // uncomment if you're having problems with a jQuery plugin
     //.autoProvidejQuery()
+
+    .configureTerserPlugin((options) => {
+        options.terserOptions = {
+            // @see https://github.com/terser-js/terser#compress-options
+            compress: {
+              // The Box cannot parse `e.default` (due to `default` being a reserved word)
+              properties: false
+            }
+        }
+    })
 ;
 
 module.exports = Encore.getWebpackConfig();
