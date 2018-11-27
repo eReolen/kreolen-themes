@@ -70,6 +70,18 @@
   }
   line-height: 1.4;
 }
+.audio-preview {
+  &__title {
+    font-size: $spacer*1.25;
+  }
+  &__author {
+    font-size: $spacer;
+  }
+  &__duration {
+    font-size: $spacer;
+    color: $color-gray-500;
+  }
+}
 
 // For the cursor to obtain the correct size, we set an initial height of the audiobook cover.
 .audio-preview .ting-cover-wrapper {
@@ -92,5 +104,10 @@
 
 // Hide cookie message popup
 #sliding-popup {
+  display: none;
+}
+
+// hide play btn on boxes
+.node-type-kreol-campaign-tv .audio-preview__player {
   display: none;
 }

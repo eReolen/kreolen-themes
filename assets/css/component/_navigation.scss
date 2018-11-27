@@ -2,13 +2,7 @@
   box-sizing: content-box;
   position: absolute;
   border-radius: 0;
-  border: solid $spacer/2 $color-primary;
-  margin: {
-    top: -$spacer/2;
-    right: -$spacer/2;
-    bottom: -$spacer/2;
-    left: -$spacer/2;
-  }
+  outline: solid $spacer/2 $color-primary;
   transition-property: top, left, bottom, right;
   transition-duration: 0.25s;
   transition-timing-function: ease-in-out;
