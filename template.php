@@ -18,7 +18,7 @@ function kreol_preprocess_node(&$variables) {
     $node = $variables['node'];
     if ('kreol_campaign' === $node->type) {
       $audio_player_config = [
-        'player_url' => '/kreol/audio-book/player?orderId={{orderId}}',
+        'player_url' => 'https://play.pubhub.dk/index118.html?o={{orderId}}&autoplay=1',
       ];
       drupal_add_js('var audio_player_config = ' . json_encode($audio_player_config) . ';', [
         'type' => 'inline',
