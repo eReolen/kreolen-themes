@@ -4,6 +4,7 @@ require('../css/geofencing.scss');
 
 (function ($) {
   const showStep = (index) => {
+    $('#geofencing').toggle(true)
     $('#geofencing .step').toggle(false)
     $('#geofencing .step[data-step="'+index+'"]').toggle(true)
   }
