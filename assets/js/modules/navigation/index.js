@@ -95,8 +95,7 @@ class GridNavigation extends Navigation {
       break
     }
 
-    if (index !== this.getCurrentIndex())
-    {
+    if (index !== this.getCurrentIndex()) {
       this.setCurrent(this.elements[index])
     }
   }

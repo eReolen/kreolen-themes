@@ -68,19 +68,19 @@ require('../css/geofencing.scss');
 
   // https://stackoverflow.com/a/13841047
   function getDistance(lon1, lat1, lon2, lat2) {
-    var R = 6371; // Radius of the earth in km
-    var dLat = toRad(lat2-lat1);  // Javascript functions in radians
-    var dLon = toRad(lon2-lon1);
+    var R = 6371 // Radius of the earth in km
+    var dLat = toRad(lat2-lat1)  // Javascript functions in radians
+    var dLon = toRad(lon2-lon1)
     var a = Math.sin(dLat/2) * Math.sin(dLat/2) +
         Math.cos(toRad(lat1)) * Math.cos(toRad(lat2)) *
-        Math.sin(dLon/2) * Math.sin(dLon/2);
-    var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
-    var d = R * c; // Distance in km
-    return 1000*d;
+        Math.sin(dLon/2) * Math.sin(dLon/2)
+    var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a))
+    var d = R * c // Distance in km
+    return 1000*d
   }
 
   function toRad(number) {
-    return number * Math.PI / 180;
+    return number * Math.PI / 180
   }
 
   // /** Converts numeric degrees to radians */

@@ -2,7 +2,7 @@ class DOMHelper {
   static addClass(element, name) {
     const names = element.className.split(/\s+/)
     if (-1 === names.indexOf(name)) {
-        element.className += ' ' + name
+      element.className += ' ' + name
     }
   }
 

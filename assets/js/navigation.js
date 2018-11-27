@@ -3,22 +3,45 @@
 import GridNavigation from './modules/navigation'
 import DOMHelper from './modules/dom-helper'
 
-require('../css/navigation.scss');
+require('../css/navigation.scss')
 
 // Skip backward/forward in seconds
-const SKIP_DELTA = 30 * 60
+const SKIP_SHORT_DELTA = 1 * 60
+const SKIP_LONG_DELTA = 5 * 60
 
 // Volume up/down step
 const VOLUME_DELTA = 10
 
 const formatTime = (time) => {
-  const seconds = time%60;
+  const seconds = time%60
   time = Math.floor(time/60)
-  const minutes = time%60;
+  const minutes = time%60
   time = Math.floor(time/60)
   const hours = time
 
   return [hours.toFixed(0), ('0'+minutes.toFixed(0)).slice(-2), ('0'+seconds.toFixed(0)).slice(-2)].join(':')
+}
+
+try {
+  const stb = gSTB
+  stb.GetVolume()
+} catch (ex) {
+  window.gSTB = {
+    Continue: () => {},
+    GetMediaLen: () => 53501,
+    GetMute: () => 0,
+    GetPosPercent: () => 42,
+    GetPosTime: () => 87,
+    GetVolume: () => {},
+    InitPlayer: () => {},
+    IsPlaying: () => true,
+    Pause: () => {},
+    Play: () => {},
+    SetMute: () => {},
+    SetPosTime: () => {},
+    SetVolume: () => {},
+    Stop: () => {}
+  }
 }
 
 window.addEventListener('load', function() {
@@ -42,13 +65,13 @@ window.addEventListener('load', function() {
   const initPlayer = (data) => {
     try {
 
-    document.querySelector('.audio-player').style.visibility = 'visible'
-    document.querySelector('.audio-player-title').innerHTML = data.artist
-    document.querySelector('.audio-player-cover img').src = data.cover
+      document.querySelector('.audio-player').style.visibility = 'visible'
+      document.querySelector('.audio-player-title').innerHTML = data.artist
+      document.querySelector('.audio-player-cover img').src = data.cover
 
-    document.querySelector('.audio-player-progress-time-elapsed').innerHTML = formatTime(0)
-    document.querySelector('.audio-player-progress-time-length').innerHTML = formatTime(data.duration)
-    document.querySelector('.audio-player-progress-bar-elapsed').style.width = '0'
+      document.querySelector('.audio-player-progress-time-elapsed').innerHTML = formatTime(0)
+      document.querySelector('.audio-player-progress-time-length').innerHTML = formatTime(data.duration)
+      document.querySelector('.audio-player-progress-bar-elapsed').style.width = '0'
 
     } catch (ex) {
       DEBUG('exception', ex.message)
@@ -140,7 +163,23 @@ window.addEventListener('load', function() {
       break
 
     case 33: // PREV TRACK
+      stb.SetPosTime(Math.max(stb.GetPosTime() - SKIP_LONG_DELTA, 0))
+      updatePlayer()
+      break
+
     case 34: // NEXT TRACK
+      stb.SetPosTime(Math.min(stb.GetPosTime() + SKIP_LONG_DELTA, stb.GetMediaLen()))
+      updatePlayer()
+      break
+
+    case 66: // SKIP BACKWARD
+      stb.SetPosTime(Math.max(stb.GetPosTime() - SKIP_SHORT_DELTA, 0))
+      updatePlayer()
+      break
+
+    case 70: // SKIP FORWARD
+      stb.SetPosTime(Math.min(stb.GetPosTime() + SKIP_SHORT_DELTA, stb.GetMediaLen()))
+      updatePlayer()
       break
 
     case 107: // VOLUME UP
@@ -148,28 +187,20 @@ window.addEventListener('load', function() {
       break
 
     case 109: // VOLUME DOWN
-     stb.SetVolume(Math.max(stb.GetVolume() - VOLUME_DELTA, 0))
+      stb.SetVolume(Math.max(stb.GetVolume() - VOLUME_DELTA, 0))
       break
 
     case 192: // MUTE
-     stb.SetMute(0 === stb.GetMute() ? 1 : 0)
+      stb.SetMute(0 === stb.GetMute() ? 1 : 0)
       break
 
     case 82: // PLAY/PAUSE
       DEBUG(stb.IsPlaying())
-     if (stb.IsPlaying()) {
-       stb.Pause()
-     } else {
-       stb.Continue()
-     }
-      break
-
-    case 66: // SKIP BACKWARD
-     stb.SetPosTime(Math.max(stb.GetPosTime() - SKIP_DELTA, 0))
-      break
-
-    case 70: // SKIP FORWARD
-     stb.SetPosTime(Math.min(stb.GetPosTime() + SKIP_DELTA, stb.GetMediaLen()))
+      if (stb.IsPlaying()) {
+        stb.Pause()
+      } else {
+        stb.Continue()
+      }
       break
 
     case 83: // STOP

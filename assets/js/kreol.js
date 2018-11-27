@@ -1,1 +1,1 @@
-require('../css/kreol.scss');
+require('../css/kreol.scss')
