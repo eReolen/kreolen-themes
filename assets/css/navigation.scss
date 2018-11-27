@@ -73,9 +73,9 @@
 .audio-preview {
   &__title div {
     font-size: $spacer*1.5;
-    max-height: $spacer*3;
+    max-height: $spacer*3 !important;
     &:after {
-      top: $spacer*3;
+      top: $spacer*3 !important;
     }
   }
   &__author p {
@@ -89,15 +89,13 @@
       font-size: $spacer*1.25;
     }
   }
-  .ting-cover-wrapper {
-    min-width: auto !important;
-  }
 }
 
 // For the cursor to obtain the correct size, we set an initial height of the audiobook cover.
 .audio-preview .ting-cover-wrapper {
-  min-width: auto;
+  min-width: auto !important;
   max-height: 150px;
+  text-align: right;
 }
 
 // Set widths of the player elements
