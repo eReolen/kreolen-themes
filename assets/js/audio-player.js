@@ -19,7 +19,7 @@
       player.find('iframe').attr('src', 'about:blank')
     }
 
-    player.find('.close').on('click', hidePlayer)
+    player.find('.modal-close').on('click', hidePlayer)
     $('[data-audio-data]').on('click', function () {
       const data = $(this).data('audio-data')
       showPlayer(data)
