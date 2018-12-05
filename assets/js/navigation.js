@@ -82,15 +82,17 @@ window.addEventListener('load', function() {
     const audioUrl = element.getAttribute('data-audio-url')
     const audioData = JSON.parse(element.getAttribute('data-audio-data'))
 
-    initPlayer(audioData)
-    DEBUG('Play audio book', audioUrl, audioData)
+    if (audioUrl && audioData) {
+      initPlayer(audioData)
+      DEBUG('Play audio book', audioUrl, audioData)
 
-    try {
-      stb.Stop()
-      stb.InitPlayer()
-      stb.Play(audioUrl)
-    } catch (ex) {
-      DEBUG('exception', ex.message)
+      try {
+        stb.Stop()
+        stb.InitPlayer()
+        stb.Play(audioUrl)
+      } catch (ex) {
+        DEBUG('exception', ex.message)
+      }
     }
   }
 

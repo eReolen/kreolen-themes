@@ -91,6 +91,11 @@ function kreol_preprocess_entity(&$variables) {
       $variables['title'] = $audio_data['title'];
       $variables['author'] = $audio_data['artist'];
       $variables['audio_data'] = $audio_data;
+      if ($wrapper->field_audio_url->value()) {
+        if (preg_match('/(?P<id>.{8}-.{4}-.{4}-.{4}-.{12})/', $wrapper->field_audio_url->value(), $matches)) {
+          $variables['audio_url'] = 'https://audio.api.streaming.pubhub.dk/Play.ashx?o=' . $matches['id'];
+        }
+      }
     }
   }
 }
