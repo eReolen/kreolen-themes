@@ -18,7 +18,7 @@ function kreol_preprocess_node(&$variables) {
     $node = $variables['node'];
     if ('kreol_campaign' === $node->type) {
       $audio_player_config = [
-        'player_url' => 'https://play.pubhub.dk/index118.html?o={{orderId}}&autoplay=1',
+        'player_url' => 'https://play.pubhub.dk/lyttestation.html?i={{isbn}}&autoplay=1',
       ];
       drupal_add_js('var audio_player_config = ' . json_encode($audio_player_config) . ';', [
         'type' => 'inline',
@@ -91,7 +91,6 @@ function kreol_preprocess_entity(&$variables) {
       $variables['title'] = $audio_data['title'];
       $variables['author'] = $audio_data['artist'];
       $variables['audio_data'] = $audio_data;
-      $variables['audio_url'] = $wrapper->field_audio_url->value();
     }
   }
 }
