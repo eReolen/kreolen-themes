@@ -35,6 +35,7 @@
 .header {
   float: left;
   width: 100%;
+  margin-bottom: 2rem;
 }
 .header-logo {
   padding-top: $spacer/4;
@@ -47,7 +48,17 @@
   float: right;
 }
 
-// set to block for test without flex.
+.field-name-body {
+  margin-bottom: 2rem;
+  font-size: 1.25rem;
+
+  // Space between paragraphs.
+  p + p {
+    margin-top: 1em;
+  }
+}
+
+// Set to block for test without flex.
 .paragraphs-items-field-audio-books .field-items {
   display: block;
 }
