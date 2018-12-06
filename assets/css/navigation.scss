@@ -47,6 +47,16 @@
   float: right;
 }
 
+.field-name-body {
+  margin-bottom: 2rem;
+  font-size: 1.25rem;
+
+  // Space between paragraphs.
+  p + p {
+    margin-top: 1em;
+  }
+}
+
 // set to block for test without flex.
 .paragraphs-items-field-audio-books .field-items {
   display: block;
