@@ -1,3 +1,21 @@
+h2, h2.heading, .lead {
+  font-family: $font-family-sans-serif;
+  font-size: $spacer*1.5;
+  color: $color-gray-500;
+  margin-top: $spacer*1.5;
+  margin-bottom: $spacer*1.5;
+}
+h3, .field-name-field-text h3 {
+  font-family: $font-family-sans-serif-bold;
+  font-weight: 900;
+  color: $color-gray-500;
+  padding-bottom: $spacer;
+}
+p {
+  line-height: 1.5;
+  margin-bottom: $spacer/2;
+}
+
 .paragraphs-item-campaign-text {
   @include heading;
 

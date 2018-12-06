@@ -17,6 +17,7 @@
   </div>
   <div class="content"<?php print $content_attributes; ?>>
     <div class="container">
+      <?php hide($content['field_tagline']); ?>
       <?php print render($content); ?>
     </div>
   </div>
