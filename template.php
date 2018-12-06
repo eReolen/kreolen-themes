@@ -15,6 +15,13 @@ function kreol_preprocess_page(&$variables) {
  */
 function kreol_preprocess_node(&$variables) {
   if (isset($variables['node'])) {
+    $css_options = [
+      'group' => CSS_THEME,
+    ];
+    $js_options = [
+      'group' => JS_THEME,
+    ];
+
     $node = $variables['node'];
     if ('kreol_campaign' === $node->type) {
       $audio_player_config = [
@@ -60,17 +67,17 @@ function kreol_preprocess_node(&$variables) {
           'footer' => t('Læs mere om hvorfor vi skal kende din lokation og hvordan vi håndterer dine data. <a href="http://www.ereolen.dk/datahåndtering">Sådan bruger vi dine data</a>'),
         ]);
 
-        drupal_add_css(drupal_get_path('theme', 'kreol') . '/build/geofencing.css');
-        drupal_add_js(drupal_get_path('theme', 'kreol') . '/build/geofencing.js');
+        drupal_add_css(drupal_get_path('theme', 'kreol') . '/build/geofencing.css', $css_options);
+        drupal_add_js(drupal_get_path('theme', 'kreol') . '/build/geofencing.js', $js_options);
       }
       else {
-        drupal_add_css(drupal_get_path('theme', 'kreol') . '/build/kreol.css');
-        drupal_add_js(drupal_get_path('theme', 'kreol') . '/build/kreol.js');
+        drupal_add_css(drupal_get_path('theme', 'kreol') . '/build/kreol.css', $css_options);
+        drupal_add_js(drupal_get_path('theme', 'kreol') . '/build/kreol.js', $js_options);
       }
     }
     elseif ('kreol_campaign_tv' === $node->type) {
-      drupal_add_css(drupal_get_path('theme', 'kreol') . '/build/navigation.css');
-      drupal_add_js(drupal_get_path('theme', 'kreol') . '/build/navigation.js');
+      drupal_add_css(drupal_get_path('theme', 'kreol') . '/build/navigation.css', $css_options);
+      drupal_add_js(drupal_get_path('theme', 'kreol') . '/build/navigation.js', $js_options);
     }
   }
 }
