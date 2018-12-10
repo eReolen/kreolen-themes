@@ -78,22 +78,37 @@ window.addEventListener('load', function() {
     }
   }
 
+  let currentlyPlayingElement = null
+
   const startPlayer = (element) => {
-    const audioUrl = element.getAttribute('data-audio-url')
-    const audioData = JSON.parse(element.getAttribute('data-audio-data'))
+    if (element === currentlyPlayingElement) {
+      if (stb.IsPlaying()) {
+        stb.Pause()
+      } else {
+        stb.Continue()
+      }
+      return
+    } else {
+      // @TODO If element matches currently playing element, then
+      // pause/play rather then restart.
+      const audioUrl = element.getAttribute('data-audio-url')
+      const audioData = JSON.parse(element.getAttribute('data-audio-data'))
 
-    if (audioUrl && audioData) {
-      initPlayer(audioData)
-      DEBUG('Play audio book', audioUrl, audioData)
+      if (audioUrl && audioData) {
+        initPlayer(audioData)
+        DEBUG('Play audio book', audioUrl, audioData)
 
-      try {
-        stb.Stop()
-        stb.InitPlayer()
-        stb.Play(audioUrl)
-      } catch (ex) {
-        DEBUG('exception', ex.message)
+        try {
+          stb.Stop()
+          stb.InitPlayer()
+          stb.Play(audioUrl)
+          currentlyPlayingElement = element
+        } catch (ex) {
+          DEBUG('exception', ex.message)
+        }
       }
     }
+    updatePlayer()
   }
 
   const stopPlayer = () => {
