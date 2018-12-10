@@ -8,8 +8,20 @@
     .field-item {
       flex: 0 0 50%;
       padding: $spacer;
+
       @include media-breakpoint-up(md) {
         flex: 0 0 25%;
+      }
+      .campaign-material {
+        display: flex;
+        flex-flow: column nowrap;
+        height: 100%;
+        .ting-cover-wrapper {
+          margin-bottom: $spacer/2;
+        }
+        &-info {
+          margin-top: auto;
+        }
       }
     }
   }
