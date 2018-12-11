@@ -25,7 +25,7 @@ function kreol_preprocess_node(&$variables) {
     $node = $variables['node'];
     if ('kreol_campaign' === $node->type) {
       $audio_player_config = [
-        'player_url' => 'https://play.pubhub.dk/lyttestation.html?i={{isbn}}&autoplay=1',
+        'player_url' => 'https://play.pubhub.dk/lyttestation.html?i={{isbn}}',
       ];
       drupal_add_js('var audio_player_config = ' . json_encode($audio_player_config) . ';', [
         'type' => 'inline',
