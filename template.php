@@ -22,10 +22,21 @@ function kreol_preprocess_node(&$variables) {
       'group' => JS_THEME,
     ];
 
+    $tracking_url = kreol_build_url(current_path(), [
+      'isbn' => '{{isbn}}',
+      'action' => '{{action}}',
+    ]);
+
     $node = $variables['node'];
     if ('kreol_campaign' === $node->type) {
+      $player_url = kreol_build_url('https://play.pubhub.dk/lyttestation.html', [
+        'i' => '{{isbn}}',
+        's' => request_path(),
+      ]);
+
       $audio_player_config = [
-        'player_url' => 'https://play.pubhub.dk/lyttestation.html?i={{isbn}}',
+        'player_url' => $player_url,
+        'tracking_url' => $tracking_url,
       ];
       drupal_add_js('var audio_player_config = ' . json_encode($audio_player_config) . ';', [
         'type' => 'inline',
@@ -76,6 +87,13 @@ function kreol_preprocess_node(&$variables) {
       }
     }
     elseif ('kreol_campaign_tv' === $node->type) {
+      $audio_player_config = [
+        'tracking_url' => $tracking_url,
+      ];
+      drupal_add_js('var audio_player_config = ' . json_encode($audio_player_config) . ';', [
+        'type' => 'inline',
+      ]);
+      $variables['campaign_audio_player'] = theme('campaign_audio_player');
       drupal_add_css(drupal_get_path('theme', 'kreol') . '/build/navigation.css', $css_options);
       drupal_add_js(drupal_get_path('theme', 'kreol') . '/build/navigation.js', $js_options);
     }
@@ -92,7 +110,7 @@ function kreol_preprocess_entity(&$variables) {
       $audio_data = json_decode($wrapper->field_audio_data->value(), TRUE);
       if (isset($audio_data['duration'])) {
         $epoch = new \DateTime('@0');
-        $time = new \DateTime('@'.$audio_data['duration']);
+        $time = new \DateTime('@' . $audio_data['duration']);
         $audio_data['duration_formatted'] = $epoch->diff($time)->format('%h:%I:%S');
       }
       $variables['title'] = $audio_data['title'];
@@ -108,7 +126,7 @@ function kreol_preprocess_entity(&$variables) {
 }
 
 /**
- *
+ * Implements hook_theme().
  */
 function kreol_theme($existing, $type, $theme, $path) {
   $items['campaign_geofencing'] = [
@@ -136,4 +154,23 @@ function kreol_theme($existing, $type, $theme, $path) {
   ];
 
   return $items;
+}
+
+/**
+ * Build a url from a path and a query.
+ *
+ * Query string values on the form `{{placeholder}}` with be kept in this form
+ * in the final url, i.e. they will not be urlencode'd.
+ */
+function kreol_build_url($path, array $query = []) {
+  $url = url($path, ['query' => $query]);
+
+  // Un-urlencode query string values on the form `{{placeholder}}`.
+  foreach ($query as $name => $value) {
+    if (preg_match('@^[{]{2}(?P<value>[^}]+)[}]{2}$@', $value, $matches)) {
+      $url = str_replace('=' . urlencode($value), '=' . '{{' . $matches['value'] . '}}', $url);
+    }
+  }
+
+  return $url;
 }

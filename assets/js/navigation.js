@@ -22,6 +22,12 @@ const formatTime = (time) => {
   return [hours.toFixed(0), ('0'+minutes.toFixed(0)).slice(-2), ('0'+seconds.toFixed(0)).slice(-2)].join(':')
 }
 
+const substitute = (text, data) => {
+  return text.replace(/{{([^}]+)}}/g, (match, key) => {
+    return key in data ? data[key] : key
+  })
+}
+
 try {
   const stb = gSTB
   stb.GetVolume()
@@ -46,6 +52,7 @@ try {
 
 window.addEventListener('load', function() {
   const stb = gSTB
+  const config = audio_player_config || {}
 
   // const debugContainer = document.createElement('pre')
   // debugContainer.style.position = 'absolute'
@@ -89,8 +96,6 @@ window.addEventListener('load', function() {
       }
       return
     } else {
-      // @TODO If element matches currently playing element, then
-      // pause/play rather then restart.
       const audioUrl = element.getAttribute('data-audio-url')
       const audioData = JSON.parse(element.getAttribute('data-audio-data'))
 
@@ -105,6 +110,21 @@ window.addEventListener('load', function() {
           currentlyPlayingElement = element
         } catch (ex) {
           DEBUG('exception', ex.message)
+        }
+
+        if (config.tracking_url) {
+          try {
+            // Track player started
+            const request = new XMLHttpRequest()
+            const trackingUrl = substitute(config.tracking_url, {
+              ...audioData,
+              ...{action: 'player-start'}
+            })
+            request.open('GET', trackingUrl)
+            request.send()
+          } catch (ex) {
+            alert(ex)
+          }
         }
       }
     }

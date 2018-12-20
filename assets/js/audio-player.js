@@ -1,5 +1,11 @@
 /* global audio_player_config:false, jQuery:false */
 
+const substitute = (text, data) => {
+  return text.replace(/{{([^}]+)}}/g, (match, key) => {
+    return key in data ? data[key] : key
+  })
+}
+
 (function ($) {
   $(() => {
     const config = audio_player_config || {}
@@ -8,10 +14,20 @@
     const showPlayer = (data) => {
       player.addClass('show')
 
-      const playerUrl = config.player_url.replace(/{{([^}]+)}}/, (match, key) => {
-        return key in data ? data[key] : key
-      })
+      const playerUrl = substitute(config.player_url, data)
       player.find('iframe').attr('src', playerUrl)
+      if (config.tracking_url) {
+        try {
+          // Track player opened
+          const request = new XMLHttpRequest()
+          const trackingUrl = substitute(config.tracking_url, {
+            ...data,
+            ...{action: 'player-open'}
+          })
+          request.open('GET', trackingUrl)
+          request.send()
+        } catch (ex) {}
+      }
     }
 
     const hidePlayer = () => {
