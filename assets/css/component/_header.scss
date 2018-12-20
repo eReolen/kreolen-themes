@@ -7,8 +7,8 @@
     }
   }
   background-color: $color-primary;
-  padding-top: $spacer/2;
-  padding-bottom: $spacer/2;
+  padding-top: $spacer;
+  padding-bottom: $spacer;
   margin-bottom: $spacer;
   &-logo {
     flex: 1 1 50%;
@@ -30,7 +30,6 @@
     }
     .lead {
       color: $color-white;
-      margin-bottom: 0;
     }
   }
 }

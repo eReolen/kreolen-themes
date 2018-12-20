@@ -11,7 +11,7 @@
         <img src="/<?php print path_to_theme(); ?>/images/eReolen_Logo.png" alt="<?php print t('Hjem') ?>" id="logo" />
       </div>
       <div class="header-tagline">
-        <p class="lead"><?php print render($content['field_tagline'][0]); ?></p>
+        <span class="lead"><?php print render($content['field_tagline'][0]); ?></span>
       </div>
     </div>
   </div>
