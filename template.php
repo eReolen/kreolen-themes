@@ -174,3 +174,29 @@ function kreol_build_url($path, array $query = []) {
 
   return $url;
 }
+
+/**
+ * Implements theme_ting_object_cover().
+ *
+ * Apart from the `$base_url` stuff, this is a verbatim copy of
+ * `pratchett_ting_object_cover`.
+ */
+function kreol_ting_object_cover($variables) {
+  // Start with the default rendering.
+  $output = theme_ting_object_cover($variables);
+
+  // Add type/quota icons.
+  $ding_entity = $variables['object'];
+  $icons = reol_frontend_ding_entity_icons($ding_entity);
+
+  // Add link if the id is not to a fake material.
+  $ding_entity_id = $ding_entity->ding_entity_id;
+  if (!reol_base_fake_id($ding_entity_id) && !isset($ding_entity->reol_no_link)) {
+    $path = isset($ding_entity->reol_is_collection) ? 'ting/collection/' : 'ting/object/';
+    $base_url = 'https://ereolen.dk/';
+    $path = $base_url . $path;
+    $output = l($output, $path . $ding_entity_id, array('html' => TRUE));
+  }
+
+  return '<div class="ting-cover-wrapper">' . $output . $icons . '</div>';
+}
