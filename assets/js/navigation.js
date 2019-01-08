@@ -73,7 +73,7 @@ window.addEventListener('load', function() {
     try {
 
       document.querySelector('.audio-player').style.visibility = 'visible'
-      document.querySelector('.audio-player-title').innerHTML = data.artist
+      document.querySelector('.audio-player-title').innerHTML = data.title
       document.querySelector('.audio-player-cover img').src = data.cover
 
       document.querySelector('.audio-player-progress-time-elapsed').innerHTML = formatTime(0)
