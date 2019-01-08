@@ -9,7 +9,7 @@
 @import 'component/breakpoints';
 @import 'component/base';
 @import 'component/grid';
-@import 'component/header';
+@import 'component/header-navigation';
 @import 'component/audio-book';
 @import 'component/materials';
 @import 'component/text';
@@ -25,6 +25,8 @@
 .container {
   width: 100% !important;
   max-width: 100% !important;
+  padding-right: 2 * $spacer;
+  padding-left: 2 * $spacer;
 }
 
 /*
@@ -43,13 +45,13 @@
   float: left;
 }
 .header-tagline {
-  padding-top: $spacer/4;
-  width: auto;
+  padding-top: $spacer/2;
+  width: 50%;
   float: right;
 }
 
 .field-name-body {
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
   font-size: 1.25rem;
 
   // Space between paragraphs.
@@ -63,13 +65,25 @@
   display: block;
 }
 
+$number-of-columns: 3;
+
 // Set width of audiobook items. And a max height to have all info visible on screen, without scroll.
 .paragraphs-items-field-audio-books .field-item {
-  flex: 1 1 33%;
-  width: 33%;
+  box-sizing: border-box;
+  flex: 1 1 1/$number-of-columns*100%;
+  width: 1/$number-of-columns*100%;
+  // width: 25%;
   float: left;
   img {
     max-height: 150px;
+  }
+
+  &:nth-child(#{$number-of-columns}n+1) {
+    clear: both;
+  }
+
+  .audio-preview__details {
+    padding-right: 10px !important;
   }
 }
 

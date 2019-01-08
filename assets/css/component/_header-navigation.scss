@@ -1,0 +1,28 @@
+.header {
+  background-color: $color-primary;
+  padding-top: $spacer;
+  padding-bottom: $spacer;
+  margin-bottom: $spacer;
+
+  &-logo {
+    float: left;
+
+    img {
+      max-height: $spacer;
+      @include media-breakpoint-up(sm) {
+        max-height: $spacer*2;
+      }
+    }
+  }
+
+  &-tagline {
+    text-align: right;
+
+    .lead {
+      font-family: sans-serif;
+      font-weight: bold;
+      color: $color-white;
+      white-space: nowrap;
+    }
+  }
+}
