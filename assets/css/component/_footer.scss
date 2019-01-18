@@ -15,6 +15,14 @@
     padding: $spacer 0;
     margin-bottom: $spacer*2;
   }
+  a {
+    color: $color-white;
+    transition: color .2s ease-in;
+    &:hover {
+      color: $color-primary;
+      transition: color .4s ease-in-out;
+    }
+  }
   img {
     float: right;
     margin-left: 1rem;
