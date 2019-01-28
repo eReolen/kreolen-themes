@@ -22,16 +22,15 @@ function kreol_preprocess_node(&$variables) {
       'group' => JS_THEME,
     ];
 
-    $tracking_url = kreol_build_url(current_path(), [
-      'isbn' => '{{isbn}}',
-      'action' => '{{action}}',
-    ]);
-
     $node = $variables['node'];
     if ('kreol_campaign' === $node->type) {
       $player_url = kreol_build_url('https://play.pubhub.dk/lyttestation.html', [
         'i' => '{{isbn}}',
+      ]);
+      $tracking_url = kreol_build_url('https://play.pubhub.dk/lyttestation.html', [
+        'i' => '{{isbn}}',
         's' => request_path(),
+        'type' => 'kampagne',
       ]);
 
       $audio_player_config = [
@@ -47,6 +46,12 @@ function kreol_preprocess_node(&$variables) {
       drupal_add_js(drupal_get_path('theme', 'kreol') . '/build/kreol.js', $js_options);
     }
     elseif ('kreol_campaign_tv' === $node->type) {
+      $tracking_url = kreol_build_url('https://play.pubhub.dk/lyttestation.html', [
+        'i' => '{{isbn}}',
+        's' => request_path(),
+        'type' => 'tv-reol',
+      ]);
+
       $audio_player_config = [
         'tracking_url' => $tracking_url,
       ];
