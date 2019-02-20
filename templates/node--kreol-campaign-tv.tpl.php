@@ -39,7 +39,7 @@
       </div>
     </div>
     <div class="audio-player-cover">
-      <img src="//placehold.it/400x600" alt="Placehold">
+      <img alt="Placeholder">
     </div>
   </div>
   <div class="audio-continue-popup" style="display: none;">
