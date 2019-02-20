@@ -5,9 +5,23 @@
  */
 
 /**
- * Implements hook_preprocess_page().
+ * Implements hook_js_alter().
  */
-function kreol_preprocess_page(&$variables) {
+function kreol_js_alter(&$js) {
+  if (user_is_logged_in()) {
+    return;
+  }
+
+  if ('node' === arg(0)) {
+    $node = node_load(arg(1));
+    if ('kreol_campaign_tv' === $node->type) {
+      $js = array_filter($js, function ($item) {
+        return 'settings' === $item
+          || is_numeric($item)
+          || 'sites/all/themes/kreol/build/navigation.js' === $item;
+      }, ARRAY_FILTER_USE_KEY);
+    }
+  }
 }
 
 /**
