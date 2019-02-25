@@ -5,6 +5,17 @@
  */
 
 /**
+ * Implements hook_page_alter().
+ */
+function kreol_page_alter(&$page) {
+  $node = menu_get_object();
+  if (NULL !== $node && 'kreol_campaign_tv' === $node->type) {
+    // Remove Webtrekk tracking script.
+    unset($page['page_bottom']['webtrekk']['#attached']['js']);
+  }
+}
+
+/**
  * Implements hook_js_alter().
  */
 function kreol_js_alter(&$js) {
