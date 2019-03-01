@@ -118,7 +118,7 @@ $number-of-columns: 3;
 
 // For the cursor to obtain the correct size, we set an initial height of the audiobook cover.
 .audio-preview .ting-cover-wrapper {
-  min-width: auto !important;
+  // min-width: auto !important;
   max-height: 150px;
   text-align: right;
 }
